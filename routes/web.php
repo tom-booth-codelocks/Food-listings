@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Cats;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,17 +23,14 @@ Route::get("/hello", function(){
     return response("<h1> hello there </h1>");
 });
 
-Route::get("/test", function() {
-    return view("test", [
-        "data" =>   [
-            [
-                "first_Var" => "hello there",
-                "second_var" => "test"
-            ], 
-            [
-                "first_Var" => "hello there",
-                "second_var" => "test2"
-            ]
-        ]
+Route::get("/", function() {
+    return view("cats", [
+        "cats" => Cats::all()
+    ]);
+});
+
+Route::get("/cats/{id}", function($id) {
+    return view("cat", [
+        "cat" => Cats::find($id)
     ]);
 });
