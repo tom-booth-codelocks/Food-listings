@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string("type");
             $table->string("tags");
             $table->string("rating");
+            $table->longText("description");
         });
     }
 

@@ -1,6 +1,7 @@
 <?php
 
-use App\Models\Cats;
+use App\Http\Controllers\CatsController;
+//use App\Models\Cats;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,14 +24,26 @@ Route::get("/hello", function(){
     return response("<h1> hello there </h1>");
 });
 
-Route::get("/", function() {
-    return view("cats", [
-        "cats" => Cats::all()
-    ]);
-});
+Route::get("/", [CatsController::class, "index"]);
 
-Route::get("/cats/{id}", function($id) {
-    return view("cat", [
-        "cat" => Cats::find($id)
-    ]);
-});
+
+
+Route::get("/cats/create", [CatsController::class, "create"]);
+
+
+Route::post("/cats", [CatsController::class, "store"]);
+
+
+
+
+// Make sure wild car routes are below ones like above
+Route::get("/cats/{cat}", [CatsController::class, "show"]);
+
+// Common Resource Routes:
+// index - Show all listings
+// show - Show single listing
+// create - show form to create new listing
+// store - store new listing
+// edit - show form to edit listing
+// update - Update listing
+// destroy - Delete listing
